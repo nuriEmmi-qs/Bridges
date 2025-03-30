@@ -1,33 +1,47 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace WhatsAppBridge.Controllers
-{
+namespace WhatsAppBridge.Controllers {
+
+    [Route("api/v1/wa/webhook")]
     [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
-    {
-        private static readonly string[] Summaries = new[]
-        {
-            "SOguk", "Ilik", "Daha Ilik", "Serin", "Nemli", "Sicak", "BUnaltici", "cok sicak", "cehennem", "anormal sicak"
-        };
+    public class WebhookController : ControllerBase {
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<WebhookController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
+        public WebhookController(ILogger<WebhookController> logger) {
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+        [HttpGet]
+        [Route("")]
+        [Route("{*path}")]
+        public IActionResult VerifyWebhook([FromQuery(Name = "hub.mode")] string mode,
+                                   [FromQuery(Name = "hub.verify_token")] string token,
+                                   [FromQuery(Name = "hub.challenge")] string challenge) {
+            if (mode == "subscribe" /*&& hub_verify_token == Environment.GetEnvironmentVariable("VERIFY_TOKEN")*/) //islevi hic yok. sifir!
+                return Content(challenge);
+            return Forbid();
         }
+
+        //[HttpPost]
+        //[Route("")]
+        //[Route("{*path}")]
+        //public IActionResult Webhook(string path) {
+
+        //    if (!Request.Headers.TryGetValue("x-hub-signature-256", out var signature) || string.IsNullOrEmpty(signature)) {
+        //        _logger.LogWarning("x-hub-signature-256 header is missing or empty.");
+        //        return Ok(); //return immediately.
+        //    }
+
+        //    if (Request.Body == null) {
+        //        _logger.LogWarning("Request.Body is null.");
+        //        return Ok(); //return immediately.
+        //    }
+
+        //    using var reader = new StreamReader(Request.Body);
+        //    var body = reader.ReadToEnd(); //do not use Async for thread safety.
+
+        //    return Ok(); //return immediately. It is necessary.
+        //}
     }
 }

@@ -1,6 +1,6 @@
-@WhatsAppBridge_HostAddress = http://localhost:5226
+@WhatsAppBridge_HostAddress = https://localhost:7265
 
-GET {{WhatsAppBridge_HostAddress}}/weatherforecast/
+GET {{WhatsAppBridge_HostAddress}}/api/v1/wa/webhook?hub.mode=subscribe&hub.challenge=3333&hub.verify_token=123456789 HTTP/1.1
 Accept: application/json
 
 ###
