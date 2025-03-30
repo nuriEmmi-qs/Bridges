@@ -8,7 +8,7 @@ namespace WhatsAppBridge.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "SOguk", "Ilik", "Daha Ilik", "Serin", "Nemli", "Sicak", "BUnaltici", "cok sicak", "cehennem", "anormal sicak"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
