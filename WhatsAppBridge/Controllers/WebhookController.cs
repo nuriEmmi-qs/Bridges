@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WhatsAppBridge.Filters;
 
 namespace WhatsAppBridge.Controllers {
 
@@ -26,6 +27,7 @@ namespace WhatsAppBridge.Controllers {
         [HttpPost]
         [Route("")]
         [Route("{*path}")]
+        [ServiceFilter(typeof(LogExecutionFilter))]
         public async Task<IActionResult> WebhookAsync(string path) {
 
             if (!Request.Headers.TryGetValue("x-hub-signature-256", out var signature) || string.IsNullOrEmpty(signature)) {
