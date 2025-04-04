@@ -1,11 +1,12 @@
-using WhatsAppBridge.Extensions;
+using Microsoft.Extensions.Options;
 
-internal class Program {
+public class Program {
     private static void Main() {
+
         var builder = WebApplication.CreateBuilder();
 
         builder.Services.AddControllers();
-        builder.Services.AddWhatsAppBridgeServices();
+        builder.Services.AddAppServices(builder.Configuration);
 
         var app = builder.Build();
 
@@ -15,7 +16,8 @@ internal class Program {
 
         app.MapControllers();
 
-        app.UseWhatsAppBridgeMiddlewares();
+        app.UseApp(app.Services.GetRequiredService<IOptions<AppSettings>>().Value ,
+            builder.Environment.EnvironmentName);
 
         app.Run();
     }
