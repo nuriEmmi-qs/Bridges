@@ -1,3 +1,5 @@
-﻿public class AppSettings {
-    public string SerilogBlobStorageConnectionString { get; set; }
+﻿public class ApiSettings {
+    public string StorageConnectionString { get; set; }
+    public string Setting1 { get; set; }
+    public string Setting2 { get; set; }
 }
