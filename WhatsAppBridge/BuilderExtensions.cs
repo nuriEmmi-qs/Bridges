@@ -1,11 +1,12 @@
 ﻿using WhatsAppBridge.Filters;
 using WhatsAppBridge.Middlewares;
+namespace WhatsAppBridge;
 
 public static class BuilderExtensions {
 
     public static IServiceCollection AddAppServices(this IServiceCollection services, ConfigurationManager configuration) {
 
-        services.Configure<ApiSettings>(configuration.GetSection(nameof(ApiSettings)));
+        services.Configure<BridgesSettings>(configuration.GetSection(nameof(BridgesSettings)));
 
         //filters
         services.AddScoped<LogExecutionFilter>();
@@ -13,7 +14,7 @@ public static class BuilderExtensions {
         return services;
     }
 
-    public static IApplicationBuilder UseApp(this IApplicationBuilder app, ApiSettings appSettings, IWebHostEnvironment environment) {
+    public static IApplicationBuilder UseApp(this IApplicationBuilder app, BridgesSettings appSettings, IWebHostEnvironment environment) {
 
         app.UseMiddleware<UnhandledExceptionMiddleware>();
         return app;

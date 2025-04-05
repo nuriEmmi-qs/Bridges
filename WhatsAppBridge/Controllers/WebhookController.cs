@@ -9,9 +9,9 @@ namespace WhatsAppBridge.Controllers {
     public class WebhookController : ControllerBase {
 
         private readonly ILogger<WebhookController> _logger;
-        private readonly ApiSettings _options;
+        private readonly BridgesSettings _options;
 
-        public WebhookController(ILogger<WebhookController> logger, IOptions<ApiSettings> iOptions) {
+        public WebhookController(ILogger<WebhookController> logger, IOptions<BridgesSettings> iOptions) {
             _logger = logger;
             _options = iOptions.Value;
         }

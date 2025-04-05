@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Options;
-
+namespace WhatsAppBridge;
 public class Program {
     private static void Main() {
 
@@ -23,7 +23,7 @@ public class Program {
 
         app.MapControllers();
 
-        app.UseApp(app.Services.GetRequiredService<IOptions<ApiSettings>>().Value,
+        app.UseApp(app.Services.GetRequiredService<IOptions<BridgesSettings>>().Value,
                    builder.Environment);
 
         app.Run();
