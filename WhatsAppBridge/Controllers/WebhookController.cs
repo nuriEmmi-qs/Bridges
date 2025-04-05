@@ -28,7 +28,7 @@ namespace WhatsAppBridge.Controllers {
             _logger.LogCritical($"Webhook verification request received. Mode: {mode}, Token: {token}, Challenge: {challenge}");
 
             if (mode == "subscribe" /*&& hub_verify_token == Environment.GetEnvironmentVariable("VERIFY_TOKEN")*/) //bizim icin islevi hic yok. sifir!
-                return Content(challenge);
+                return Content("deployed" + challenge);
             return Forbid();
         }
 
