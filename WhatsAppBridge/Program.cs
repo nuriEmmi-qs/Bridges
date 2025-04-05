@@ -1,26 +1,19 @@
 using Microsoft.Extensions.Options;
+
 namespace WhatsAppBridge;
 public class Program {
     private static void Main() {
 
         var builder = WebApplication.CreateBuilder();
 
-        //builder.Configuration
-        //    .SetBasePath(Directory.GetCurrentDirectory())
-        //    .AddJsonFile("appsettings.json", optional: false)
-        //    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
-        //    .AddEnvironmentVariables();
+        builder.SetupLogger();
 
         builder.Services.AddControllers();
-
         builder.Services.AddAppServices(builder.Configuration);
 
         var app = builder.Build();
-
         app.UseHttpsRedirection();
-
         app.UseAuthorization();
-
         app.MapControllers();
 
         app.UseApp(app.Services.GetRequiredService<IOptions<BridgesSettings>>().Value,
@@ -28,4 +21,5 @@ public class Program {
 
         app.Run();
     }
+
 }
