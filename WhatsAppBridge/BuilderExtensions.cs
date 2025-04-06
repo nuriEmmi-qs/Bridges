@@ -2,6 +2,7 @@
 using Serilog;
 using WhatsAppBridge.Filters;
 using WhatsAppBridge.Middlewares;
+using WhatsAppBridge.Utilities;
 
 namespace WhatsAppBridge;
 
@@ -25,27 +26,24 @@ public static class BuilderExtensions {
     }
 
     public static void SetupLogger(this WebApplicationBuilder builder) {
-
-        const string logDefaultTableName = "Logs";
-
-        string storageConnectionString = builder.Configuration.GetConnectionString("StorageConnectionString");
-        var storageTableName = builder.Configuration["StorageLogTableName"] ?? logDefaultTableName;
         
-        var logEventLevel = builder.Configuration.GetValue("Logging:LogLevel:WhatsAppBridge", LogEventLevel.Warning);
-
-        var loggerConfig = new LoggerConfiguration();
         if (builder.Environment.IsDevelopment()) {
-            loggerConfig.WriteTo.Console(restrictedToMinimumLevel: logEventLevel);
+            var loggerConfig = new LoggerConfiguration();
+            loggerConfig.WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information);
+            Log.Logger = loggerConfig.CreateLogger();
         }
         else {
-            loggerConfig.WriteTo.AzureTableStorage(
-                storageTableName: storageTableName,
-                connectionString: storageConnectionString,
-                restrictedToMinimumLevel: logEventLevel
-            );
+            string storageConnectionString = builder.Configuration.GetConnectionString("StorageConnectionString");
+            var storageTableName = builder.Configuration["StorageLogTableName"] ?? "Logs";
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Warning()
+                .WriteTo.Sink(new SimpleAzureTableSink(storageConnectionString, storageTableName))
+                .CreateLogger();
         }
-
-        Log.Logger = loggerConfig.CreateLogger();
         builder.Host.UseSerilog();
     }
 }
+
+
+
+

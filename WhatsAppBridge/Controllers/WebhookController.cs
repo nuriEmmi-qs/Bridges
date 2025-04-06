@@ -24,7 +24,11 @@ namespace WhatsAppBridge.Controllers {
                                    [FromQuery(Name = "hub.challenge")] string challenge) {
 
 
+            _logger.LogDebug($"Webhook verification request received. Mode: {mode}, Token: {token}, Challenge: {challenge}");
+            _logger.LogInformation($"Webhook verification request received. Mode: {mode}, Token: {token}, Challenge: {challenge}");
+            _logger.LogTrace($"Webhook verification request received. Mode: {mode}, Token: {token}, Challenge: {challenge}");
             _logger.LogWarning($"Webhook verification request received. Mode: {mode}, Token: {token}, Challenge: {challenge}");
+            _logger.LogError($"Webhook verification request received. Mode: {mode}, Token: {token}, Challenge: {challenge}");
             _logger.LogCritical($"Webhook verification request received. Mode: {mode}, Token: {token}, Challenge: {challenge}");
 
             if (mode == "subscribe" /*&& hub_verify_token == Environment.GetEnvironmentVariable("VERIFY_TOKEN")*/) //bizim icin islevi hic yok. sifir!
