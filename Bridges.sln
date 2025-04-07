@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsAppBridge", "WhatsAppBridge\WhatsAppBridge.csproj", "{D3CB8672-1200-48B2-B60E-7B497AC0602D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{844BE0F5-4672-4D19-B4C4-A790A8FFA51B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D3CB8672-1200-48B2-B60E-7B497AC0602D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3CB8672-1200-48B2-B60E-7B497AC0602D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3CB8672-1200-48B2-B60E-7B497AC0602D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{844BE0F5-4672-4D19-B4C4-A790A8FFA51B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844BE0F5-4672-4D19-B4C4-A790A8FFA51B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844BE0F5-4672-4D19-B4C4-A790A8FFA51B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844BE0F5-4672-4D19-B4C4-A790A8FFA51B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
