@@ -23,7 +23,6 @@ namespace WhatsAppBridge.Controllers {
                                    [FromQuery(Name = "hub.verify_token")] string token,
                                    [FromQuery(Name = "hub.challenge")] string challenge) {
 
-
             _logger.LogDebug($"Webhook verification request received. Mode: {mode}, Token: {token}, Challenge: {challenge}");
             _logger.LogInformation($"Webhook verification request received. Mode: {mode}, Token: {token}, Challenge: {challenge}");
             _logger.LogTrace($"Webhook verification request received. Mode: {mode}, Token: {token}, Challenge: {challenge}");
